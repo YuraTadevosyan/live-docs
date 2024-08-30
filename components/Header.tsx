@@ -14,7 +14,7 @@ export default function Header ({ children, className }: HeaderProps) {
     <div className={cn("header", className)}>
       <Link
         href='/'
-        className="flex items-center"
+        className="flex items-center md:flex-1"
       >
         <Image
           src="/assets/icons/logo-icon.svg"
