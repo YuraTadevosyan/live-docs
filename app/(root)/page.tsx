@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation'
 import { dateConverter } from '@/lib/utils'
 import Header from '@/components/Header'
 import AddDocumentBtn from '@/components/AddDocumentBtn'
+import Notification from '@/components/Notification'
+import DeleteModal from '@/components/DeleteModal'
 import { getDocuments } from '@/lib/actions/room.actions'
 
 export default async function Home() {
@@ -14,14 +16,13 @@ export default async function Home() {
   if(!user) redirect('/sign-in')
   
   const documents = await getDocuments(user.emailAddresses[0].emailAddress)
-  console.log(documents.length)
 
   return (
     <main className="home-container">
       <Header className="sticky-0 top-0 left-0">
         <div className="flex items-center gap-2 lg:gap-4">
+          <Notification />
 
-          Notification
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -61,7 +62,7 @@ export default async function Home() {
                     <p className="text-sm font-light text-blue-100">Created about {dateConverter(createdAt)}</p>
                   </div>
                 </Link>
-                {/*<DeleteModal roomId={id} />*/}
+                <DeleteModal roomId={id} />
               </li>
             ))}
           </ul>
